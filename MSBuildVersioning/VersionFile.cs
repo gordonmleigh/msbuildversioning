@@ -6,14 +6,19 @@ using Microsoft.Build.Utilities;
 namespace MSBuildVersioning
 {
     /// <summary>
-    /// Abstract MSBuild task that reads a template file, replaces tokens in the file content, and
-    /// then writes the content to a destination file.
+    /// MSBuild task that reads a template file, replaces tokens in the file content, and then
+    /// writes the content to a destination file.
     /// </summary>
-    public abstract class AbstractVersionFile : Task
+    public class VersionFile : Task
     {
-        private AbstractVersionTokenReplacer tokenReplacer;
+        private VersionTokenReplacer tokenReplacer;
 
-        protected AbstractVersionFile(AbstractVersionTokenReplacer processor)
+        public VersionFile()
+        {
+            this.tokenReplacer = new VersionTokenReplacer();
+        }
+
+        public VersionFile(VersionTokenReplacer processor)
         {
             this.tokenReplacer = processor;
         }

@@ -8,7 +8,7 @@ namespace MSBuildVersioning
     /// <summary>
     /// Replaces tokens in a string with information from a <c>HgInfoProvider</c>.
     /// </summary>
-    public class HgVersionTokenReplacer : AbstractVersionTokenReplacer
+    public class HgVersionTokenReplacer : VersionTokenReplacer
     {
         public HgVersionTokenReplacer(HgInfoProvider infoProvider)
         {

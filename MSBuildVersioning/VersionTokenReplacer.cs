@@ -8,13 +8,21 @@ namespace MSBuildVersioning
     public delegate string TokenFunction();
     public delegate string TokenFunction<T>(T arg);
 
-    public abstract class AbstractVersionTokenReplacer
+    /// <summary>
+    /// Replaces tokens in a string with basic project versioning information.
+    /// </summary>
+    public class VersionTokenReplacer
     {
         private IList<Token> tokens;
 
-        protected AbstractVersionTokenReplacer()
+        public VersionTokenReplacer()
         {
             tokens = new List<Token>();
+
+            AddToken("DATE", () => DateTime.Now.ToString("yyyy-MM-dd"));
+            AddToken("DATETIME", () => DateTime.Now.ToString("s"));
+            AddToken("UTCDATE", () => DateTime.UtcNow.ToString("yyyy-MM-dd"));
+            AddToken("UTCDATETIME", () => DateTime.UtcNow.ToString("s"));
         }
 
         protected void AddToken(string tokenName, TokenFunction function)

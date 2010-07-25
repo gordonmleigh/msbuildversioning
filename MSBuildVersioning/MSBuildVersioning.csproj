@@ -45,10 +45,10 @@
     <Compile Include="HgVersionFile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SvnVersionTokenReplacer.cs" />
-    <Compile Include="AbstractVersionFile.cs" />
+    <Compile Include="VersionFile.cs" />
     <Compile Include="SvnVersionFile.cs" />
     <Compile Include="SvnInfoProvider.cs" />
-    <Compile Include="AbstractVersionTokenReplacer.cs" />
+    <Compile Include="VersionTokenReplacer.cs" />
     <None Include="Properties\VersionInfo.base.cs" />
     <Compile Include="Properties\VersionInfo.cs" />
   </ItemGroup>

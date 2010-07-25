@@ -8,7 +8,7 @@ namespace MSBuildVersioning
     /// <summary>
     /// Replaces tokens in a string with information from a <c>SvnInfoProvider</c>.
     /// </summary>
-    public class SvnVersionTokenReplacer : AbstractVersionTokenReplacer
+    public class SvnVersionTokenReplacer : VersionTokenReplacer
     {
         public SvnVersionTokenReplacer(SvnInfoProvider infoProvider)
         {
