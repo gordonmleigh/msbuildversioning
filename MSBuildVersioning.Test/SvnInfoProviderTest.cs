@@ -6,16 +6,16 @@ using NUnit.Framework;
 namespace MSBuildVersioning.Test
 {
     [TestFixture]
-    public class SvnVersionInfoTest
+    public class SvnInfoProviderTest
     {
-        public SvnVersionInfo SvnWC1
+        public SvnInfoProvider SvnWC1
         {
-            get { return new SvnVersionInfo() { Path = @"C:\Temp\TestRepositories\SvnWC1" }; }
+            get { return new SvnInfoProvider() { Path = @"C:\Temp\TestRepositories\SvnWC1" }; }
         }
 
-        public SvnVersionInfo SvnWC2
+        public SvnInfoProvider SvnWC2
         {
-            get { return new SvnVersionInfo() { Path = @"C:\Temp\TestRepositories\SvnWC2" }; }
+            get { return new SvnInfoProvider() { Path = @"C:\Temp\TestRepositories\SvnWC2" }; }
         }
 
         [Test]

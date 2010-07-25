@@ -6,9 +6,13 @@ using System.ComponentModel;
 
 namespace MSBuildVersioning
 {
-    public abstract class AbstractVersionInfo
+    /// <summary>
+    /// Abstract class providing helper methods to execute and scrape information from source
+    /// control command line programs.
+    /// </summary>
+    public abstract class SourceControlInfoProvider
     {
-        protected AbstractVersionInfo()
+        protected SourceControlInfoProvider()
         {
             Path = "";
         }

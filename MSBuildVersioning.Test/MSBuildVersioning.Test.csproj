@@ -48,11 +48,11 @@
     <Compile Include="..\MSBuildVersioning\Properties\VersionInfo.cs">
       <Link>Properties\VersionInfo.cs</Link>
     </Compile>
-    <Compile Include="SvnVersionFileTest.cs" />
-    <Compile Include="HgVersionFileTest.cs" />
-    <Compile Include="HgVersionInfoTest.cs" />
+    <Compile Include="SvnVersionTokenReplacerTest.cs" />
+    <Compile Include="HgVersionTokenReplacerTest.cs" />
+    <Compile Include="HgInfoProviderTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SvnVersionInfoTest.cs" />
+    <Compile Include="SvnInfoProviderTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MSBuildVersioning\MSBuildVersioning.csproj">

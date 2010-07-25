@@ -18,7 +18,7 @@ namespace MSBuildVersioning.Debug
     {
         static void Main(string[] args)
         {
-            new HgVersionInfoTest().GetRevisionIdTest();
+            new HgInfoProviderTest().GetRevisionIdTest();
         }
     }
 }

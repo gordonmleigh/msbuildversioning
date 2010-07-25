@@ -2,7 +2,11 @@
 
 namespace MSBuildVersioning
 {
-    public class HgVersionInfo : AbstractVersionInfo
+    /// <summary>
+    /// Provides Mercurial information for a particular file path, by executing and scraping
+    /// information from the hg.exe command-line program.
+    /// </summary>
+    public class HgInfoProvider : SourceControlInfoProvider
     {
         private int? revisionNumber;
         private string revisionId;

@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
-using System.Diagnostics;
 
 namespace MSBuildVersioning
 {
-    public class SvnVersionInfo : AbstractVersionInfo
+    /// <summary>
+    /// Provides Subversion information for a particular file path, by executing and scraping
+    /// information from the svn.exe command-line program.
+    /// </summary>
+    public class SvnInfoProvider : SourceControlInfoProvider
     {
         private int? revisionNumber;
         private bool? isMixedRevisions;

@@ -6,16 +6,16 @@ using NUnit.Framework;
 namespace MSBuildVersioning.Test
 {
     [TestFixture]
-    public class HgVersionInfoTest
+    public class HgInfoProviderTest
     {
-        public HgVersionInfo Hg1
+        public HgInfoProvider Hg1
         {
-            get { return new HgVersionInfo() { Path = @"C:\Temp\TestRepositories\Hg1" }; }
+            get { return new HgInfoProvider() { Path = @"C:\Temp\TestRepositories\Hg1" }; }
         }
 
-        public HgVersionInfo Hg2
+        public HgInfoProvider Hg2
         {
-            get { return new HgVersionInfo() { Path = @"C:\Temp\TestRepositories\Hg2" }; }
+            get { return new HgInfoProvider() { Path = @"C:\Temp\TestRepositories\Hg2" }; }
         }
 
         [Test]

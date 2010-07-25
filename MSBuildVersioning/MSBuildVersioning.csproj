@@ -39,13 +39,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BuildErrorException.cs" />
-    <Compile Include="HgVersionInfo.cs" />
-    <Compile Include="AbstractVersionInfo.cs" />
+    <Compile Include="HgInfoProvider.cs" />
+    <Compile Include="HgVersionTokenReplacer.cs" />
+    <Compile Include="SourceControlInfoProvider.cs" />
     <Compile Include="HgVersionFile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SvnVersionTokenReplacer.cs" />
     <Compile Include="AbstractVersionFile.cs" />
     <Compile Include="SvnVersionFile.cs" />
-    <Compile Include="SvnVersionInfo.cs" />
+    <Compile Include="SvnInfoProvider.cs" />
+    <Compile Include="AbstractVersionTokenReplacer.cs" />
     <None Include="Properties\VersionInfo.base.cs" />
     <Compile Include="Properties\VersionInfo.cs" />
   </ItemGroup>
