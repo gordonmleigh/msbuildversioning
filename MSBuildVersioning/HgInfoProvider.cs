@@ -25,11 +25,11 @@ namespace MSBuildVersioning
             {
                 string revisionNumberStr = ExecuteCommand("hg.exe", "identify -n")[0];
 
-                if (revisionNumberStr.EndsWith("+"))
+                if (revisionNumberStr.Contains("+"))
                 {
                     isWorkingCopyDirty = true;
                     revisionNumber = int.Parse(
-                        revisionNumberStr.Substring(0, revisionNumberStr.Length - 1));
+                        revisionNumberStr.Substring(0, revisionNumberStr.IndexOf("+")));
                 }
                 else
                 {
@@ -46,10 +46,10 @@ namespace MSBuildVersioning
             {
                 revisionId = ExecuteCommand("hg.exe", "identify -i")[0];
 
-                if (revisionId.EndsWith("+"))
+                if (revisionId.Contains("+"))
                 {
                     isWorkingCopyDirty = true;
-                    revisionId = revisionId.Substring(0, revisionId.Length - 1);
+                    revisionId = revisionId.Substring(0, revisionId.IndexOf("+"));
                 }
                 else
                 {
