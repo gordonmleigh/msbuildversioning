@@ -30,6 +30,8 @@ namespace MSBuildVersioning
             AddToken("UTCDAY", () => DateTime.UtcNow.ToString("dd"));
             AddToken("UTCDATE", () => DateTime.UtcNow.ToString("yyyy-MM-dd"));
             AddToken("UTCDATETIME", () => DateTime.UtcNow.ToString("s"));
+            AddToken("USER", () => Environment.UserName);
+            AddToken("MACHINE", () => Environment.MachineName);
         }
 
         protected void AddToken(string tokenName, TokenFunction function)

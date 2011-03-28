@@ -40,11 +40,11 @@ namespace MSBuildVersioning
             return (int)revisionNumber;
         }
 
-        public virtual string GetRevisionId()
+        public virtual string GetRevisionId(bool completeHash)
         {
             if (revisionId == null)
             {
-                revisionId = ExecuteCommand("hg.exe", "identify -i")[0];
+                revisionId = ExecuteCommand("hg.exe", completeHash ? "identify -i --debug" : "identify -i")[0];
 
                 if (revisionId.Contains("+"))
                 {
