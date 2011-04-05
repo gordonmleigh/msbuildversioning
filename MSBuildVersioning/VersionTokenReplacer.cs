@@ -7,6 +7,7 @@ namespace MSBuildVersioning
 {
     public delegate string TokenFunction();
     public delegate string TokenFunction<T>(T arg);
+    public delegate string TokenFunction<T1, T2>(T1 arg1, T2 arg2);
 
     /// <summary>
     /// Replaces tokens in a string with basic project versioning information.
@@ -23,6 +24,8 @@ namespace MSBuildVersioning
             AddToken("DATETIME", () => DateTime.Now.ToString("s"));
             AddToken("UTCDATE", () => DateTime.UtcNow.ToString("yyyy-MM-dd"));
             AddToken("UTCDATETIME", () => DateTime.UtcNow.ToString("s"));
+            AddToken("ENVIRONMENT", GetEnvironmentValue);
+            AddToken("YEAR", () => DateTime.Now.ToString("yyyy"));
         }
 
         protected void AddToken(string tokenName, TokenFunction function)
@@ -46,6 +49,15 @@ namespace MSBuildVersioning
         protected void AddToken(string tokenName, TokenFunction<string> function)
         {
             tokens.Add(new StringArgToken
+            {
+                tokenName = tokenName,
+                function = function
+            });
+        }
+
+        protected void AddToken(string tokenName, TokenFunction<string, string> function)
+        {
+            tokens.Add(new TwoStringArgToken
             {
                 tokenName = tokenName,
                 function = function
@@ -117,6 +129,31 @@ namespace MSBuildVersioning
                 }
                 return str;
             }
+        }
+
+        private class TwoStringArgToken : Token
+        {
+            public TokenFunction<string,string> function;
+
+            public override string Replace(string str)
+            {
+                MatchCollection revnumModMatches = Regex.Matches(str,
+                    @"\$" + tokenName + @"\(""(.+?)"",""(.+?)""\)\$");
+                foreach (Match match in revnumModMatches)
+                {
+                    string token = match.Groups[0].Value;
+                    string arg1 = match.Groups[1].Value;
+                    string arg2 = match.Groups[2].Value;
+                    str = str.Replace(token, function(arg1, arg2));
+                }
+                return str;
+            }
+        }
+
+        private string GetEnvironmentValue(string name, string defaultValue)
+        {
+            var returnValue = Environment.GetEnvironmentVariable(name);
+            return returnValue ?? defaultValue;
         }
     }
 }

@@ -22,5 +22,27 @@ namespace MSBuildVersioning.Test
 
             Assert.IsTrue(difference < TimeSpan.TicksPerSecond);
         }
+
+        [Test]
+        public void EnvironmentReplacement_WithValidEnvironmentVariable()
+        {
+            var content = "Username: $ENVIRONMENT(\"USERNAME\",\"UnknownUser\")$";
+
+            content = new VersionTokenReplacer().Replace(content);
+
+            var expected = "Username: " + Environment.UserName;
+
+            Assert.That(content, Is.EqualTo(expected));
+        }
+
+        [Test]
+        public void EnvironmentReplacement_WithInvalidEnvironmentVariable()
+        {
+            var content = "Environment: $ENVIRONMENT(\"NO_SUCH_VARIABLE_SHOULD_EXIST\",\"DefaultValue\")$";
+
+            content = new VersionTokenReplacer().Replace(content);
+
+            Assert.That(content, Is.EqualTo("Environment: DefaultValue"));
+        }
     }
 }
