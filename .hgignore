@@ -1,0 +1,8 @@
+relre:\.suo$
+relre:\.user$
+relre:/bin/
+relre:/obj/
+relre:/VersionInfo\.cs$
+relre:^References/MSBuildVersioning\.dll$
+relre:^MSBuildVersioning\.Debug/Program\.cs$
+relre:/BuildInfo\.cs$
