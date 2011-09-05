@@ -39,6 +39,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BuildErrorException.cs" />
+    <Compile Include="GitInfoProvider.cs" />
+    <Compile Include="GitVersionFile.cs" />
+    <Compile Include="GitVersionTokenReplacer.cs" />
     <Compile Include="HgInfoProvider.cs" />
     <Compile Include="HgVersionTokenReplacer.cs" />
     <Compile Include="SourceControlInfoProvider.cs" />
