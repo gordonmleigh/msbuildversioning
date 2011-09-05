@@ -23,13 +23,18 @@ namespace MSBuildVersioning
 
         protected virtual IList<string> ExecuteCommand(string fileName, string arguments)
         {
+            return ExecuteCommand(fileName, arguments, null);
+        }
+
+        protected virtual IList<string> ExecuteCommand(string fileName, string arguments, Func<int, string, bool> errorHandler)
+        {
             IList<string> output = new List<string>();
-            ExecuteCommand(fileName, arguments, outputLine => output.Add(outputLine));
+            ExecuteCommand(fileName, arguments, outputLine => output.Add(outputLine), errorHandler);
             return output;
         }
 
         protected virtual void ExecuteCommand(string fileName, string arguments,
-            Action<string> outputHandler)
+            Action<string> outputHandler, Func<int, string, bool> errorHandler)
         {
             StringBuilder error = new StringBuilder();
 
@@ -78,7 +83,8 @@ namespace MSBuildVersioning
                 process.BeginErrorReadLine();
                 process.WaitForExit();
 
-                if (process.ExitCode != 0 || error.Length > 0)
+                var reportError = errorHandler != null && errorHandler(process.ExitCode, error.ToString());
+                if (reportError && (process.ExitCode != 0 || error.Length > 0))
                 {
                     throw new BuildErrorException(String.Format(
                         "{0} command \"{1} {2}\" exited with code {3}.\n{4}",
