@@ -10,6 +10,7 @@ namespace MSBuildVersioning
     {
         private int? revisionNumber;
         private string revisionId;
+        private string longRevisionId;
         private bool? isWorkingCopyDirty;
         private string branch;
         private string tags;
@@ -23,40 +24,44 @@ namespace MSBuildVersioning
         {
             if (revisionNumber == null)
             {
-                string revisionNumberStr = ExecuteCommand("hg.exe", "identify -n")[0];
-
-                if (revisionNumberStr.Contains("+"))
-                {
-                    isWorkingCopyDirty = true;
-                    revisionNumber = int.Parse(
-                        revisionNumberStr.Substring(0, revisionNumberStr.IndexOf("+")));
-                }
-                else
-                {
-                    isWorkingCopyDirty = false;
-                    revisionNumber = int.Parse(revisionNumberStr);
-                }
+                revisionNumber = int.Parse(ExecuteRevisionCommand("identify -n"));
             }
             return (int)revisionNumber;
         }
 
-        public virtual string GetRevisionId(bool completeHash)
+        public virtual string GetRevisionId()
         {
             if (revisionId == null)
             {
-                revisionId = ExecuteCommand("hg.exe", completeHash ? "identify -i --debug" : "identify -i")[0];
-
-                if (revisionId.Contains("+"))
-                {
-                    isWorkingCopyDirty = true;
-                    revisionId = revisionId.Substring(0, revisionId.IndexOf("+"));
-                }
-                else
-                {
-                    isWorkingCopyDirty = false;
-                }
+                revisionId = ExecuteRevisionCommand("identify -i");
             }
             return revisionId;
+        }
+
+        public virtual string GetLongRevisionId()
+        {
+            if (longRevisionId == null)
+            {
+                longRevisionId = ExecuteRevisionCommand("identify -i --debug");
+            }
+            return longRevisionId;
+        }
+
+        private string ExecuteRevisionCommand(string hgArguments)
+        {
+            string result = ExecuteCommand("hg.exe", hgArguments)[0];
+
+            if (result.Contains("+"))
+            {
+                isWorkingCopyDirty = true;
+                result = result.Substring(0, result.IndexOf("+"));
+            }
+            else
+            {
+                isWorkingCopyDirty = false;
+            }
+
+            return result;
         }
 
         public virtual bool IsWorkingCopyDirty()
