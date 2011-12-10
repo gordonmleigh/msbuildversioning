@@ -20,12 +20,21 @@ namespace MSBuildVersioning
         {
             tokens = new List<Token>();
 
+            AddToken("YEAR", () => DateTime.Now.ToString("yyyy"));
+            AddToken("MONTH", () => DateTime.Now.ToString("MM"));
+            AddToken("DAY", () => DateTime.Now.ToString("dd"));
             AddToken("DATE", () => DateTime.Now.ToString("yyyy-MM-dd"));
             AddToken("DATETIME", () => DateTime.Now.ToString("s"));
+
+            AddToken("UTCYEAR", () => DateTime.UtcNow.ToString("yyyy"));
+            AddToken("UTCMONTH", () => DateTime.UtcNow.ToString("MM"));
+            AddToken("UTCDAY", () => DateTime.UtcNow.ToString("dd"));
             AddToken("UTCDATE", () => DateTime.UtcNow.ToString("yyyy-MM-dd"));
             AddToken("UTCDATETIME", () => DateTime.UtcNow.ToString("s"));
+
+            AddToken("USER", () => Environment.UserName);
+            AddToken("MACHINE", () => Environment.MachineName);
             AddToken("ENVIRONMENT", GetEnvironmentValue);
-            AddToken("YEAR", () => DateTime.Now.ToString("yyyy"));
         }
 
         protected void AddToken(string tokenName, TokenFunction function)
