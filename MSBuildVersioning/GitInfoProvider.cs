@@ -6,7 +6,7 @@ namespace MSBuildVersioning
     /// Provides Mercurial information for a particular file path, by executing and scraping
     /// information from the hg.exe command-line program.
     /// </summary>
-    public class HgInfoProvider : SourceControlInfoProvider
+    public class GitInfoProvider : SourceControlInfoProvider
     {
         private int? revisionNumber;
         private string revisionId;
@@ -16,54 +16,65 @@ namespace MSBuildVersioning
 
         public override string SourceControlName
         {
-            get { return "Mercurial"; }
+            get { return "Git"; }
         }
 
         public virtual int GetRevisionNumber()
         {
             if (revisionNumber == null)
             {
-                string revisionNumberStr = ExecuteCommand("hg.exe", "identify -n")[0];
-
-                if (revisionNumberStr.Contains("+"))
-                {
-                    isWorkingCopyDirty = true;
-                    revisionNumber = int.Parse(
-                        revisionNumberStr.Substring(0, revisionNumberStr.IndexOf("+")));
-                }
-                else
-                {
-                    isWorkingCopyDirty = false;
-                    revisionNumber = int.Parse(revisionNumberStr);
-                }
+                InitRevision();
             }
             return (int)revisionNumber;
         }
 
-        public virtual string GetRevisionId(bool completeHash)
+        public virtual string GetRevisionId()
         {
             if (revisionId == null)
             {
-                revisionId = ExecuteCommand("hg.exe", completeHash ? "identify -i --debug" : "identify -i")[0];
+                InitRevision();
+            }
+            return revisionId;
+        }
 
-                if (revisionId.Contains("+"))
+        private void InitRevision()
+        {
+            ExecuteCommand("git.exe", "rev-list", output =>
+            {
+                if (revisionId == null)
                 {
-                    isWorkingCopyDirty = true;
-                    revisionId = revisionId.Substring(0, revisionId.IndexOf("+"));
+                    revisionId = output;
+                    revisionNumber = 1;
                 }
                 else
                 {
-                    isWorkingCopyDirty = false;
+                    revisionNumber += 1;
                 }
-            }
-            return revisionId;
+            },
+            null);
         }
 
         public virtual bool IsWorkingCopyDirty()
         {
             if (isWorkingCopyDirty == null)
             {
-                GetRevisionNumber();
+                ExecuteCommand("git.exe", "diff-index --quiet HEAD", (exitCode, error) =>
+                {
+                    if (exitCode == 0)
+                    {
+                        isWorkingCopyDirty = false;
+                        return false;
+                    }
+                    else if (exitCode == 1)
+                    {
+                        isWorkingCopyDirty = true;
+                        return false;
+                    }
+                    else
+                    {
+                        return true;
+                    }
+                });
             }
             return (bool)isWorkingCopyDirty;
         }
@@ -72,7 +83,7 @@ namespace MSBuildVersioning
         {
             if (branch == null)
             {
-                branch = ExecuteCommand("hg.exe", "identify -b")[0];
+                branch = ExecuteCommand("git.exe", "describe --all")[0];
             }
             return branch;
         }
@@ -81,7 +92,7 @@ namespace MSBuildVersioning
         {
             if (tags == null)
             {
-                tags = ExecuteCommand("hg.exe", "identify -t")[0];
+                tags = ExecuteCommand("git.exe", "describe")[0];
             }
             return tags;
         }

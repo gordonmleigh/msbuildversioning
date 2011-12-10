@@ -34,9 +34,12 @@ namespace MSBuildVersioning.Test
         [Test]
         public void GetRevisionIdTest()
         {
-            Assert.AreEqual("1024d08c6b37", Hg1.GetRevisionId());
-            Assert.AreEqual("bf82f571c792", Hg2.GetRevisionId());
-            Assert.AreEqual("80de7a096ed2", Hg3.GetRevisionId());
+            Assert.AreEqual("1024d08c6b37", Hg1.GetRevisionId(false));
+            Assert.AreEqual("bf82f571c792", Hg2.GetRevisionId(false));
+            Assert.AreEqual("80de7a096ed2", Hg3.GetRevisionId(false));
+            Assert.AreEqual("1024d08c6b3733bd3b0a346e485d1ecd64183eeb", Hg1.GetRevisionId(true));
+            Assert.AreEqual("bf82f571c7928bc7078b8b8413b601d17fa04cbd", Hg2.GetRevisionId(true));
+            Assert.AreEqual("80de7a096ed2d19142a946024165542c043971bf", Hg3.GetRevisionId(true));
         }
 
         [Test]

@@ -25,7 +25,7 @@ namespace MSBuildVersioning
             if (revisionNumber == null)
             {
                 SvnInfoParser parser = new SvnInfoParser();
-                ExecuteCommand("svn.exe", "info -R", parser.ReadLine);
+                ExecuteCommand("svn.exe", "info -R", parser.ReadLine, null);
                 revisionNumber = parser.maxRevisionNumber;
                 isMixedRevisions = parser.isMixedRevisions;
             }
@@ -46,7 +46,7 @@ namespace MSBuildVersioning
             if (isWorkingCopyDirty == null)
             {
                 SvnStatusParser parser = new SvnStatusParser();
-                ExecuteCommand("svn.exe", "status", parser.ReadLine);
+                ExecuteCommand("svn.exe", "status", parser.ReadLine, null);
                 isWorkingCopyDirty = parser.isWorkingCopyDirty;
             }
             return (bool)isWorkingCopyDirty;
