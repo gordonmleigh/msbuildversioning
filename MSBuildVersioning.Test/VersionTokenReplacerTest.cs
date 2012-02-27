@@ -44,5 +44,15 @@ namespace MSBuildVersioning.Test
 
             Assert.That(content, Is.EqualTo("Environment: DefaultValue"));
         }
+
+        [Test]
+        public void EnvironmentReplacement_WithInvalidEnvironmentVariableAndEmptyDefaultValue()
+        {
+            var content = "Environment: $ENVIRONMENT(\"NO_SUCH_VARIABLE_SHOULD_EXIST\",\"\")$";
+
+            content = new VersionTokenReplacer().Replace(content);
+
+            Assert.That(content, Is.EqualTo("Environment: "));
+        }
     }
 }
