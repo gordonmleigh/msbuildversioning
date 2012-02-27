@@ -147,7 +147,7 @@ namespace MSBuildVersioning
             public override string Replace(string str)
             {
                 MatchCollection revnumModMatches = Regex.Matches(str,
-                    @"\$" + tokenName + @"\(""(.+?)"",""(.+?)""\)\$");
+                    @"\$" + tokenName + @"\(""(.+?)"",""(.*?)""\)\$");
                 foreach (Match match in revnumModMatches)
                 {
                     string token = match.Groups[0].Value;
