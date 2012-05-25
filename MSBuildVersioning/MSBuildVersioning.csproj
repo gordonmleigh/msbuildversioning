@@ -60,6 +60,9 @@
     <Compile Include="SvnVersionFile.cs" />
     <Compile Include="SvnInfoProvider.cs" />
     <Compile Include="VersionTokenReplacer.cs" />
+    <None Include="MSBuildVersioning.nuspec" />
+    <None Include="nu\Install.ps1" />
+    <None Include="nu\MSBuildVersioning.targets" />
     <None Condition="'$(Configuration)|$(Platform)' != 'Bootstrap|AnyCPU'" Include="Properties\VersionInfo.base.cs" />
     <Compile Condition="'$(Configuration)|$(Platform)' != 'Bootstrap|AnyCPU'" Include="Properties\VersionInfo.cs" />
   </ItemGroup>
