@@ -6,9 +6,9 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("MSBuildVersioning")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("MSBuild Versioning allows you to build programs with version numbers such as Major.Minor.Revision, where Revision is automatically set to your currently checked-out source control revision number.")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("Joe Daley")]
 [assembly: AssemblyProduct("MSBuildVersioning")]
 [assembly: AssemblyCopyright("Copyright © Joe Daley 2010")]
 [assembly: AssemblyTrademark("")]
