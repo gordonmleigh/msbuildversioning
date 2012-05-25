@@ -52,6 +52,7 @@
     <Compile Include="GitVersionTokenReplacer.cs" />
     <Compile Include="HgInfoProvider.cs" />
     <Compile Include="HgVersionTokenReplacer.cs" />
+    <None Include="nu\VersionInfo.base.cs" />
     <Compile Include="SourceControlInfoProvider.cs" />
     <Compile Include="HgVersionFile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -60,7 +61,9 @@
     <Compile Include="SvnVersionFile.cs" />
     <Compile Include="SvnInfoProvider.cs" />
     <Compile Include="VersionTokenReplacer.cs" />
-    <None Include="MSBuildVersioning.nuspec" />
+    <None Include="MSBuildVersioning.nuspec">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="nu\Install.ps1" />
     <None Include="nu\MSBuildVersioning.targets" />
     <None Condition="'$(Configuration)|$(Platform)' != 'Bootstrap|AnyCPU'" Include="Properties\VersionInfo.base.cs" />
