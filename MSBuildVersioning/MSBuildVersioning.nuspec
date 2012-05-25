@@ -17,8 +17,7 @@
     </dependencies>
   </metadata>
   <files>
-    <file src="bin\Release\MSBuildVersioning.dll" target="content\msbuild" />
-    <file src="nu\MsBuildVersioning.targets" target="content\msbuild" />
+    <file src="nu\MsBuildVersioning.targets" target="lib\net35" />
     <file src="nu\VersionInfo.base.cs" target="content\Properties" />
     <file src="nu\Install.ps1" target="tools" />
   </files>
