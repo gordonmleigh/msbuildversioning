@@ -39,7 +39,7 @@ namespace MSBuildVersioning
 
         private void InitRevision()
         {
-            ExecuteCommand("git.exe", "rev-list", output =>
+            ExecuteCommand("git.exe", "rev-list HEAD", output =>
             {
                 if (revisionId == null)
                 {
