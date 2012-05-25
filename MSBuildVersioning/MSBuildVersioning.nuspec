@@ -15,10 +15,11 @@
     <dependencies>
       <dependency id="NuGetPowerTools" version="0.29" />
     </dependencies>
-    <references />
   </metadata>
   <files>
-    <file src="nu\MsBuildVersioning.targets" target="tools" />
+    <file src="bin\Release\MSBuildVersioning.dll" target="content\msbuild" />
+    <file src="nu\MsBuildVersioning.targets" target="content\msbuild" />
+    <file src="nu\VersionInfo.base.cs" target="content\Properties" />
     <file src="nu\Install.ps1" target="tools" />
   </files>
 </package>
