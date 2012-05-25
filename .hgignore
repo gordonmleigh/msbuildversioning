@@ -8,3 +8,4 @@ relre:^MSBuildVersioning\.Debug/Program\.cs$
 relre:/BuildInfo\.cs$
 syntax: glob
 packages/NUnit.2.6.0.12054/*
+packages/Moq.4.0.10827/*
