@@ -3,9 +3,9 @@ relre:\.user$
 relre:/bin/
 relre:/obj/
 relre:/VersionInfo\.cs$
-relre:^References/MSBuildVersioning\.dll$
 relre:^MSBuildVersioning\.Debug/Program\.cs$
 relre:/BuildInfo\.cs$
 syntax: glob
+References/*
 packages/NUnit.2.6.0.12054/*
 packages/Moq.4.0.10827/*
