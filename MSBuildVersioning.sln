@@ -1,11 +1,17 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual C# Express 2010
+# Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MSBuildVersioning", "MSBuildVersioning\MSBuildVersioning.csproj", "{A8C04BD0-ED60-4920-920F-FE3A12F34C50}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MSBuildVersioning.Test", "MSBuildVersioning.Test\MSBuildVersioning.Test.csproj", "{44FF758F-F289-4A5A-A75C-13F1040F2157}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MSBuildVersioning.Debug", "MSBuildVersioning.Debug\MSBuildVersioning.Debug.csproj", "{AE5DA302-0323-4085-A93A-DB07555D9ABA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{9E21D01B-9433-4A7D-9F8C-5B9A92AD6499}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\nuget.exe = .nuget\nuget.exe
+		.nuget\nuget.targets = .nuget\nuget.targets
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
