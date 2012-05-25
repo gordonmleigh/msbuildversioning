@@ -31,10 +31,18 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Bootstrap|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>..\References\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Build.Framework" />
-    <Reference Include="Microsoft.Build.Tasks" />
-    <Reference Include="Microsoft.Build.Utilities" />
+    <Reference Include="Microsoft.Build.Tasks.v3.5" />
+    <Reference Include="Microsoft.Build.Utilities.v3.5" />
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
@@ -52,13 +60,13 @@
     <Compile Include="SvnVersionFile.cs" />
     <Compile Include="SvnInfoProvider.cs" />
     <Compile Include="VersionTokenReplacer.cs" />
-    <None Include="Properties\VersionInfo.base.cs" />
-    <Compile Include="Properties\VersionInfo.cs" />
+    <None Condition="'$(Configuration)|$(Platform)' != 'Bootstrap|AnyCPU'" Include="Properties\VersionInfo.base.cs" />
+    <Compile Condition="'$(Configuration)|$(Platform)' != 'Bootstrap|AnyCPU'" Include="Properties\VersionInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <UsingTask TaskName="HgVersionFile" AssemblyFile="..\References\MSBuildVersioning.dll" />
+  <UsingTask Condition="'$(Configuration)|$(Platform)' != 'Bootstrap|AnyCPU'" TaskName="HgVersionFile" AssemblyFile="..\References\MSBuildVersioning.dll" />
   <Target Name="BeforeBuild">
-    <HgVersionFile TemplateFile="Properties\VersionInfo.base.cs" DestinationFile="Properties\VersionInfo.cs" />
+    <HgVersionFile Condition="'$(Configuration)|$(Platform)' != 'Bootstrap|AnyCPU'" TemplateFile="Properties\VersionInfo.base.cs" DestinationFile="Properties\VersionInfo.cs" />
   </Target>
   <Target Name="AfterBuild">
   </Target>
