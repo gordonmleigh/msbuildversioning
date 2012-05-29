@@ -82,11 +82,12 @@ Write-Host "Using location=$location"
 $buildProject.Xml.AddImport("$location\MsBuildVersioning.targets")
 
 # avoid compiling the template
-$base = $buildProject.Items | Where-Object { $_.Key -eq 'Compile' } | Select-Object -ExpandProperty Value | Where-Object { $_.EvaluatedInclude -eq 'Properties\VersionInfo.base.cs' } 
+$base = $buildProject.Items | Where-Object { $_.Key -eq 'Compile' } | Select-Object -ExpandProperty Value | Where-Object { $_.EvaluatedInclude -eq 'Properties\VersionInfo.cs' } 
 $base.ItemType = "None"
 
 # do compile the result
-$buildProject.Xml.AddItem("Compile", 'Properties\VersionInfo.cs')
+$designer = $buildProject.Xml.AddItem("Compile", 'Properties\VersionInfo.Designer.cs')
+$designer.AddMetadata("DependentUpon", "VersionInfo.cs")
 
 # figure out which scm we're using and add a proper task
 $path = Get-Location
@@ -103,8 +104,8 @@ while ($path -ne [System.IO.PATH]::GetPathRoot($path)) {
             ".hg" { $task = $target.AddTask("HgVersionFile") }
             ".svn" { $task = $target.AddTask("SvnVersionFile") }
         }
-        $task.SetParameter("TemplateFile", 'Properties\VersionInfo.base.cs')
-        $task.SetParameter("DestinationFile", 'Properties\VersionInfo.cs')
+        $task.SetParameter("TemplateFile", 'Properties\VersionInfo.cs')
+        $task.SetParameter("DestinationFile", 'Properties\VersionInfo.Designer.cs')
         break
     }
     $path = [System.IO.PATH]::GetFullPath([System.IO.PATH]::Combine($path, ".."))

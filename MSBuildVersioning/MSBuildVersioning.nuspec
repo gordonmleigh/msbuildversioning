@@ -18,7 +18,7 @@
   </metadata>
   <files>
     <file src="nu\MsBuildVersioning.targets" target="lib\net35" />
-    <file src="nu\VersionInfo.base.cs" target="content\Properties" />
+    <file src="nu\VersionInfo.cs" target="content\Properties" />
     <file src="nu\Install.ps1" target="tools" />
   </files>
 </package>
