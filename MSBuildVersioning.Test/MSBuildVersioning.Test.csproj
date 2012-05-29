@@ -50,7 +50,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\MSBuildVersioning\Properties\VersionInfo.cs">
+    <Compile Include="..\MSBuildVersioning\Properties\VersionInfo.Designer.cs">
       <Link>Properties\VersionInfo.cs</Link>
     </Compile>
     <Compile Include="SvnVersionTokenReplacerTest.cs" />
