@@ -2,7 +2,7 @@ relre:\.suo$
 relre:\.user$
 relre:/bin/
 relre:/obj/
-relre:/VersionInfo\.cs$
+relre:/VersionInfo\.Designer\.cs$
 relre:^MSBuildVersioning\.Debug/Program\.cs$
 relre:/BuildInfo\.cs$
 syntax: glob
