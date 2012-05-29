@@ -10,3 +10,5 @@ References/*
 packages/NUnit.2.6.0.12054/*
 packages/Moq.4.0.10827/*
 packages/NuGetPowerTools.0.29/*
+nunit-out/*
+*.nupkg
