@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace MSBuildVersioning
 {
@@ -49,7 +50,13 @@ namespace MSBuildVersioning
 
         private string ExecuteRevisionCommand(string hgArguments)
         {
-            string result = ExecuteCommand("hg.exe", hgArguments)[0];
+            IList<string> results = ExecuteCommand("hg.exe", hgArguments);
+            if (results.Count == 0)
+            {
+                isWorkingCopyDirty = true;
+                return "0";
+            }
+            string result = results[0];
 
             if (result.Contains("+"))
             {

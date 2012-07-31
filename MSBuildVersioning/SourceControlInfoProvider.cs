@@ -1,8 +1,8 @@
 ﻿using System;
-using System.Diagnostics;
-using System.Text;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
+using System.Text;
 
 namespace MSBuildVersioning
 {
@@ -14,12 +14,14 @@ namespace MSBuildVersioning
     {
         protected SourceControlInfoProvider()
         {
-            Path = "";
+            Path = String.Empty;
         }
 
-        public virtual string Path { get; set; }
+        public string Path { get; set; }
 
         public abstract string SourceControlName { get; }
+
+        public bool IgnoreToolNotFound { get; set; }
 
         protected virtual IList<string> ExecuteCommand(string fileName, string arguments)
         {
@@ -66,17 +68,21 @@ namespace MSBuildVersioning
                 }
                 catch (Win32Exception e)
                 {
-                    if (e.NativeErrorCode == 2) // file not found
+                    if (e.NativeErrorCode != 2 && e.NativeErrorCode != 267) // The system cannot find the file specified. || The directory name is invalid.
                     {
                         throw new BuildErrorException(String.Format(
-                            "{0} command \"{1}\" could not be found." + Environment.NewLine +
-                            "Please ensure that {0} is installed.",
-                            SourceControlName, fileName));
+                            "{0} command \"{1}\" with path \"{2}\" could not be started." + Environment.NewLine +
+                            "Please ensure that {0} is installed. Error Code is {3}.",
+                            SourceControlName, fileName, Path, e.NativeErrorCode));
                     }
-                    else
+                    if (IgnoreToolNotFound)
                     {
-                        throw;
+                        return;
                     }
+                    throw new BuildErrorException(String.Format(
+                        "{0} command \"{1}\" could not be found." + Environment.NewLine +
+                        "Please ensure that {0} is installed. Error {2}.",
+                        SourceControlName, fileName, e.NativeErrorCode));
                 }
 
                 process.BeginOutputReadLine();

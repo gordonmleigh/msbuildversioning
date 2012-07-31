@@ -12,6 +12,8 @@ namespace MSBuildVersioning
     {
         public HgVersionTokenReplacer(HgInfoProvider infoProvider)
         {
+            SourceControlInfoProvider = infoProvider;
+
             AddToken("REVNUM", () => infoProvider.GetRevisionNumber().ToString());
             AddToken("REVNUM_MOD", x => (infoProvider.GetRevisionNumber() % x).ToString());
             AddToken("REVNUM_DIV", x => (infoProvider.GetRevisionNumber() / x).ToString());
