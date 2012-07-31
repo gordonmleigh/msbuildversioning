@@ -16,6 +16,8 @@ namespace MSBuildVersioning
     {
         private IList<Token> tokens;
 
+        public SourceControlInfoProvider SourceControlInfoProvider { get; set; }
+
         public VersionTokenReplacer()
         {
             tokens = new List<Token>();

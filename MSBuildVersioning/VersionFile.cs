@@ -29,6 +29,10 @@ namespace MSBuildVersioning
         [Required]
         public string DestinationFile { get; set; }
 
+        public bool IgnoreToolNotFound { get; set; }
+
+        public string ToolPath { get; set; }
+
         public override bool Execute()
         {
             try
@@ -37,6 +41,8 @@ namespace MSBuildVersioning
                 string content = File.ReadAllText(TemplateFile);
 
                 // Replace tokens in the template file content with version info
+                tokenReplacer.SourceControlInfoProvider.IgnoreToolNotFound = IgnoreToolNotFound;
+                tokenReplacer.SourceControlInfoProvider.Path = ToolPath;
                 content = tokenReplacer.Replace(content);
 
                 // Write the destination file, only if it needs to be updated
