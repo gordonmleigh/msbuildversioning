@@ -51,6 +51,7 @@
     <Compile Include="GitVersionFile.cs" />
     <Compile Include="GitVersionTokenReplacer.cs" />
     <Compile Include="HgInfoProvider.cs" />
+    <Compile Include="HgVersionInformation.cs" />
     <Compile Include="HgVersionTokenReplacer.cs" />
     <None Include="nu\VersionInfo.cs" />
     <Compile Include="SourceControlInfoProvider.cs" />
