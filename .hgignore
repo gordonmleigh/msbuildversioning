@@ -7,7 +7,7 @@ relre:^MSBuildVersioning\.Debug/Program\.cs$
 relre:/BuildInfo\.cs$
 syntax: glob
 References/*
-packages/NUnit.2.6.0.12054/*
+packages/NUnit.2.6.1/*
 packages/Moq.4.0.10827/*
 packages/NuGetPowerTools.0.29/*
 nunit-out/*
