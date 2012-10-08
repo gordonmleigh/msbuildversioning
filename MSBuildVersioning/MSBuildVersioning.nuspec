@@ -17,7 +17,8 @@
     </dependencies>
   </metadata>
   <files>
-    <file src="nu\MsBuildVersioning.targets" target="lib\net35" />
+    <file src="bin\Release\MsBuildVersioning.dll" target="lib\net40" />
+    <file src="nu\MsBuildVersioning.targets" target="lib\net40" />
     <file src="nu\VersionInfo.cs" target="content\Properties" />
     <file src="nu\Install.ps1" target="tools" />
   </files>
