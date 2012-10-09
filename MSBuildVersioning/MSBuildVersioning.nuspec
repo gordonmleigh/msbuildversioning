@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>$id$</id>
-    <version>$version$</version>
+    <version>$version$-local</version>
     <title>$id$</title>
     <authors>$author$</authors>
     <licenseUrl>http://versioning.codeplex.com/license</licenseUrl>
