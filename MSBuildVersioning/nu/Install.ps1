@@ -62,6 +62,7 @@ $buildProject.Items | Where-Object { $_.Key -eq 'Reference' } | Select-Object -E
 # remove reference
 $ref = $buildProject.Items | Where-Object { $_.Key -eq 'Reference' } | Select-Object -ExpandProperty Value | Where-Object { $_.EvaluatedInclude.StartsWith('MSBuildVersioning') }
 if ($ref) {
+    Write-Host $ref
     $buildProject.RemoveItem($ref)
 
     # figure out our installation path
