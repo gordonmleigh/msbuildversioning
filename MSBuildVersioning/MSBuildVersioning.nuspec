@@ -11,10 +11,6 @@
     <description>$description$</description>
     <releaseNotes>First package build.</releaseNotes>
     <copyright>Copyright © Joe Daley 2010</copyright>
-    <!-- <tags>Tag1 Tag2</tags> -->
-    <dependencies>
-      <dependency id="NuGetPowerTools" version="0.29" />
-    </dependencies>
   </metadata>
   <files>
     <file src="bin\Release\MsBuildVersioning.dll" target="lib\net40" />
