@@ -8,6 +8,7 @@ namespace MSBuildVersioning
     /// </summary>
     public class HgInfoProvider : SourceControlInfoProvider
     {
+        private const string ExecutableName = "hg";
         private int? revisionNumber;
         private string revisionId;
         private string longRevisionId;
@@ -49,7 +50,7 @@ namespace MSBuildVersioning
 
         private string ExecuteRevisionCommand(string hgArguments)
         {
-            string result = ExecuteCommand("hg.exe", hgArguments)[0];
+            string result = ExecuteCommand(ExecutableName, hgArguments)[0];
 
             if (result.Contains("+"))
             {
@@ -77,7 +78,7 @@ namespace MSBuildVersioning
         {
             if (branch == null)
             {
-                branch = ExecuteCommand("hg.exe", "identify -b")[0];
+                branch = ExecuteCommand(ExecutableName, "identify -b")[0];
             }
             return branch;
         }
@@ -86,7 +87,7 @@ namespace MSBuildVersioning
         {
             if (tags == null)
             {
-                tags = ExecuteCommand("hg.exe", "identify -t")[0];
+                tags = ExecuteCommand(ExecutableName, "identify -t")[0];
             }
             return tags;
         }
