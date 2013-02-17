@@ -9,6 +9,7 @@ namespace MSBuildVersioning
     /// </summary>
     public class SvnInfoProvider : SourceControlInfoProvider
     {
+        private const string ExecutableName = "svn";
         private int? revisionNumber;
         private bool? isMixedRevisions;
         private bool? isWorkingCopyDirty;
@@ -25,7 +26,7 @@ namespace MSBuildVersioning
             if (revisionNumber == null)
             {
                 SvnInfoParser parser = new SvnInfoParser();
-                ExecuteCommand("svn.exe", "info -R", parser.ReadLine, null);
+                ExecuteCommand(ExecutableName, "info -R", parser.ReadLine, null);
                 revisionNumber = parser.maxRevisionNumber;
                 isMixedRevisions = parser.isMixedRevisions;
             }
@@ -46,7 +47,7 @@ namespace MSBuildVersioning
             if (isWorkingCopyDirty == null)
             {
                 SvnStatusParser parser = new SvnStatusParser();
-                ExecuteCommand("svn.exe", "status", parser.ReadLine, null);
+                ExecuteCommand(ExecutableName, "status", parser.ReadLine, null);
                 isWorkingCopyDirty = parser.isWorkingCopyDirty;
             }
             return (bool)isWorkingCopyDirty;
@@ -56,7 +57,7 @@ namespace MSBuildVersioning
         {
             if (repositoryUrl == null)
             {
-                IList<string> svnInfo = ExecuteCommand("svn.exe", "info");
+                IList<string> svnInfo = ExecuteCommand(ExecutableName, "info");
                 foreach (string line in svnInfo)
                 {
                     if (line.StartsWith("URL: "))
