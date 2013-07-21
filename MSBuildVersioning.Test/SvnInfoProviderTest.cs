@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
 using System.Text;
 using NUnit.Framework;
 
@@ -8,14 +10,44 @@ namespace MSBuildVersioning.Test
     [TestFixture]
     public class SvnInfoProviderTest
     {
+        private const string TestRepositoriesPath = @"..\..\..\TestRepositories";
+
+        [TestFixtureSetUp]
+        public void Init()
+        {
+            using (Process process = new Process())
+            {
+                process.StartInfo.FileName = "powershell.exe";
+                process.StartInfo.Arguments = @"-ExecutionPolicy Bypass .\build-svn.ps1";
+                process.StartInfo.WorkingDirectory = TestRepositoriesPath;
+
+                process.Start();
+                process.WaitForExit();
+            }
+        }
+
+        [TestFixtureTearDown]
+        public void CleanUp()
+        {
+            using (Process process = new Process())
+            {
+                process.StartInfo.FileName = "powershell.exe";
+                process.StartInfo.Arguments = @"-ExecutionPolicy Bypass .\clean-svn.ps1";
+                process.StartInfo.WorkingDirectory = TestRepositoriesPath;
+
+                process.Start();
+                process.WaitForExit();
+            }
+        }
+
         public SvnInfoProvider SvnWC1
         {
-            get { return new SvnInfoProvider() { Path = @"C:\Temp\TestRepositories\SvnWC1" }; }
+            get { return new SvnInfoProvider() { Path = Path.Combine(TestRepositoriesPath, "SvnWC1") }; }
         }
 
         public SvnInfoProvider SvnWC2
         {
-            get { return new SvnInfoProvider() { Path = @"C:\Temp\TestRepositories\SvnWC2" }; }
+            get { return new SvnInfoProvider() { Path = Path.Combine(TestRepositoriesPath, "SvnWC2") }; }
         }
 
         [Test]
@@ -42,15 +74,19 @@ namespace MSBuildVersioning.Test
         [Test]
         public void GetRepositoryUrlTest()
         {
-            Assert.AreEqual("file:///C:/Temp/TestRepositories/SvnRepo", SvnWC1.GetRepositoryUrl());
-            Assert.AreEqual("file:///C:/Temp/TestRepositories/SvnRepo/branches/beef", SvnWC2.GetRepositoryUrl());
+            string repoUrl = "file:///" + Path.GetFullPath(TestRepositoriesPath).Replace('\\', '/') + "/SvnRepo";
+
+            Assert.AreEqual(repoUrl, SvnWC1.GetRepositoryUrl());
+            Assert.AreEqual(repoUrl + "/branches/beef", SvnWC2.GetRepositoryUrl());
         }
 
         [Test]
         public void GetRepositoryRootTest()
         {
-            Assert.AreEqual("file:///C:/Temp/TestRepositories/SvnRepo", SvnWC1.GetRepositoryRoot());
-            Assert.AreEqual("file:///C:/Temp/TestRepositories/SvnRepo", SvnWC2.GetRepositoryRoot());
+            string repoUrl = "file:///" + Path.GetFullPath(TestRepositoriesPath).Replace('\\', '/') + "/SvnRepo";
+
+            Assert.AreEqual(repoUrl, SvnWC1.GetRepositoryRoot());
+            Assert.AreEqual(repoUrl, SvnWC2.GetRepositoryRoot());
         }
 
         [Test]

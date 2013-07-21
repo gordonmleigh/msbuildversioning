@@ -1,0 +1,12 @@
+--- trunk/Sambuca Chicken.txt
++++ trunk/Sambuca Chicken.txt
+@@ -1,6 +1,8 @@
+ Ingredients:
+ chicken
++whipping cream
+ Sambuca liqueur
++orange juice concentrate
+ 
+ Instructions:
+-In a large frying pan, saute chicken until barely cooked. Add Sambuca to pan and stir well.
++In a large frying pan, saute chicken until barely cooked. Add whipping cream, Sambuca and orange juice to pan and stir well.
