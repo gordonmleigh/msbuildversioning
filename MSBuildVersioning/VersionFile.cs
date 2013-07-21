@@ -41,8 +41,11 @@ namespace MSBuildVersioning
                 string content = File.ReadAllText(TemplateFile);
 
                 // Replace tokens in the template file content with version info
-                tokenReplacer.SourceControlInfoProvider.IgnoreToolNotFound = IgnoreToolNotFound;
-                tokenReplacer.SourceControlInfoProvider.Path = ToolPath;
+                if (tokenReplacer.SourceControlInfoProvider != null)
+                {
+                    tokenReplacer.SourceControlInfoProvider.IgnoreToolNotFound = IgnoreToolNotFound;
+                    tokenReplacer.SourceControlInfoProvider.Path = ToolPath;
+                }
                 content = tokenReplacer.Replace(content);
 
                 // Write the destination file, only if it needs to be updated
