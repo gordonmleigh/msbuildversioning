@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
 using System.Text;
 using NUnit.Framework;
 
@@ -8,19 +10,47 @@ namespace MSBuildVersioning.Test
     [TestFixture]
     public class HgInfoProviderTest
     {
+        private const string TestRepositoriesPath = @"..\..\..\TestRepositories";
+
+        [TestFixtureSetUp]
+        public void Init()
+        {
+            using (Process process = new Process())
+            {
+                process.StartInfo.FileName = "build-hg.cmd";
+                process.StartInfo.WorkingDirectory = TestRepositoriesPath;
+
+                process.Start();
+                process.WaitForExit();
+            }
+        }
+
+        [TestFixtureTearDown]
+        public void CleanUp()
+        {
+            using (Process process = new Process())
+            {
+                process.StartInfo.FileName = "clean-hg.cmd";
+                process.StartInfo.WorkingDirectory = TestRepositoriesPath;
+
+                process.Start();
+                process.WaitForExit();
+            }
+        }
+
         public HgInfoProvider Hg1
         {
-            get { return new HgInfoProvider() { Path = @"C:\Temp\TestRepositories\Hg1" }; }
+            get { return new HgInfoProvider() { Path = Path.Combine(TestRepositoriesPath, "Hg1") }; }
         }
 
         public HgInfoProvider Hg2
         {
-            get { return new HgInfoProvider() { Path = @"C:\Temp\TestRepositories\Hg2" }; }
+            get { return new HgInfoProvider() { Path = Path.Combine(TestRepositoriesPath, "Hg2") }; }
         }
 
         public HgInfoProvider Hg3
         {
-            get { return new HgInfoProvider() { Path = @"C:\Temp\TestRepositories\Hg3" }; }
+            get { return new HgInfoProvider() { Path = Path.Combine(TestRepositoriesPath, "Hg3") }; }
         }
 
         [Test]
@@ -34,25 +64,25 @@ namespace MSBuildVersioning.Test
         [Test]
         public void GetRevisionIdTest()
         {
-            Assert.AreEqual("1024d08c6b37", Hg1.GetRevisionId());
-            Assert.AreEqual("bf82f571c792", Hg2.GetRevisionId());
-            Assert.AreEqual("80de7a096ed2", Hg3.GetRevisionId());
+            Assert.AreEqual("69f3210533ce", Hg1.GetRevisionId());
+            Assert.AreEqual("d391553df0c3", Hg2.GetRevisionId());
+            Assert.AreEqual("0e144a435697", Hg3.GetRevisionId());
         }
 
         [Test]
         public void GetLongRevisionIdTest()
         {
-            Assert.AreEqual("1024d08c6b3733bd3b0a346e485d1ecd64183eeb", Hg1.GetLongRevisionId());
-            Assert.AreEqual("bf82f571c7928bc7078b8b8413b601d17fa04cbd", Hg2.GetLongRevisionId());
-            Assert.AreEqual("80de7a096ed2d19142a946024165542c043971bf", Hg3.GetLongRevisionId());
+            Assert.AreEqual("69f3210533ceb435d065012a90e4fbb591df83bd", Hg1.GetLongRevisionId());
+            Assert.AreEqual("d391553df0c385ff61e4df733d57ff44b8203380", Hg2.GetLongRevisionId());
+            Assert.AreEqual("0e144a435697975e632dc78b9e1f4c7678619cdb", Hg3.GetLongRevisionId());
         }
 
         [Test]
         public void GetRevisionIds_ShortThenLong()
         {
             HgInfoProvider provider = Hg1;
-            Assert.AreEqual("1024d08c6b37", provider.GetRevisionId());
-            Assert.AreEqual("1024d08c6b3733bd3b0a346e485d1ecd64183eeb", provider.GetLongRevisionId());
+            Assert.AreEqual("69f3210533ce", provider.GetRevisionId());
+            Assert.AreEqual("69f3210533ceb435d065012a90e4fbb591df83bd", provider.GetLongRevisionId());
         }
 
         [Test]
