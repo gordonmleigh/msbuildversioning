@@ -64,25 +64,25 @@ namespace MSBuildVersioning.Test
         [Test]
         public void GetRevisionIdTest()
         {
-            Assert.AreEqual("69f3210533ce", Hg1.GetRevisionId());
-            Assert.AreEqual("d391553df0c3", Hg2.GetRevisionId());
-            Assert.AreEqual("0e144a435697", Hg3.GetRevisionId());
+            Assert.AreEqual("13f86c88b0f7", Hg1.GetRevisionId());
+            Assert.AreEqual("28dd28262437", Hg2.GetRevisionId());
+            Assert.AreEqual("9ae2c31c83c6", Hg3.GetRevisionId());
         }
 
         [Test]
         public void GetLongRevisionIdTest()
         {
-            Assert.AreEqual("69f3210533ceb435d065012a90e4fbb591df83bd", Hg1.GetLongRevisionId());
-            Assert.AreEqual("d391553df0c385ff61e4df733d57ff44b8203380", Hg2.GetLongRevisionId());
-            Assert.AreEqual("0e144a435697975e632dc78b9e1f4c7678619cdb", Hg3.GetLongRevisionId());
+            Assert.AreEqual("13f86c88b0f76f0f0dc5964dbd48452054c27031", Hg1.GetLongRevisionId());
+            Assert.AreEqual("28dd28262437a4d9a515fd3564e0721f62c04da8", Hg2.GetLongRevisionId());
+            Assert.AreEqual("9ae2c31c83c6cabdf5670a92c8d0625ad10be5ca", Hg3.GetLongRevisionId());
         }
 
         [Test]
         public void GetRevisionIds_ShortThenLong()
         {
             HgInfoProvider provider = Hg1;
-            Assert.AreEqual("69f3210533ce", provider.GetRevisionId());
-            Assert.AreEqual("69f3210533ceb435d065012a90e4fbb591df83bd", provider.GetLongRevisionId());
+            Assert.AreEqual("13f86c88b0f7", provider.GetRevisionId());
+            Assert.AreEqual("13f86c88b0f76f0f0dc5964dbd48452054c27031", provider.GetLongRevisionId());
         }
 
         [Test]
