@@ -37,6 +37,11 @@ namespace MSBuildVersioning
             return revisionId;
         }
 
+        public object GetLongRevisionId()
+        {
+            throw new NotImplementedException();
+        }
+
         private void InitRevision()
         {
             ExecuteCommand("git.exe", "rev-list HEAD", output =>

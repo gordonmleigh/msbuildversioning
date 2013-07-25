@@ -53,6 +53,7 @@
     <Compile Include="..\MSBuildVersioning\Properties\VersionInfo.Designer.cs">
       <Link>Properties\VersionInfo.cs</Link>
     </Compile>
+    <Compile Include="GitInfoProviderTest.cs" />
     <Compile Include="SvnVersionTokenReplacerTest.cs" />
     <Compile Include="HgVersionTokenReplacerTest.cs" />
     <Compile Include="HgInfoProviderTest.cs" />
