@@ -8,6 +8,7 @@ namespace MSBuildVersioning
     /// </summary>
     public class GitInfoProvider : SourceControlInfoProvider
     {
+        private const string ExecutableName = "git";
         private int? revisionNumber;
         private string revisionId;
         private bool? isWorkingCopyDirty;
@@ -44,7 +45,7 @@ namespace MSBuildVersioning
 
         private void InitRevision()
         {
-            ExecuteCommand("git.exe", "rev-list HEAD", output =>
+            ExecuteCommand(ExecutableName, "rev-list HEAD", output =>
             {
                 if (revisionId == null)
                 {
@@ -63,7 +64,7 @@ namespace MSBuildVersioning
         {
             if (isWorkingCopyDirty == null)
             {
-                ExecuteCommand("git.exe", "diff-index --quiet HEAD", (exitCode, error) =>
+                ExecuteCommand(ExecutableName, "diff-index --quiet HEAD", (exitCode, error) =>
                 {
                     if (exitCode == 0)
                     {
@@ -88,7 +89,7 @@ namespace MSBuildVersioning
         {
             if (branch == null)
             {
-                branch = ExecuteCommand("git.exe", "describe --all")[0];
+                branch = ExecuteCommand(ExecutableName, "describe --all")[0];
             }
             return branch;
         }
@@ -97,7 +98,7 @@ namespace MSBuildVersioning
         {
             if (tags == null)
             {
-                tags = ExecuteCommand("git.exe", "describe")[0];
+                tags = ExecuteCommand(ExecutableName, "describe")[0];
             }
             return tags;
         }
