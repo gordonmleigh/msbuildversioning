@@ -18,6 +18,7 @@ build/
 [Oo]bj/
 [Pp]ackages/
 *.generated.*
+*.[Dd]esigner.*
 *.tmp_proj
 .vs/
 References/
