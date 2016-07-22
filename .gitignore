@@ -20,6 +20,7 @@ build/
 *.generated.*
 *.tmp_proj
 .vs/
+References/
 
 # MSTest test Results
 [Tt]est[Rr]esult*/

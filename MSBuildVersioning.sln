@@ -1,6 +1,8 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MSBuildVersioning", "MSBuildVersioning\MSBuildVersioning.csproj", "{A8C04BD0-ED60-4920-920F-FE3A12F34C50}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MSBuildVersioning.Test", "MSBuildVersioning.Test\MSBuildVersioning.Test.csproj", "{44FF758F-F289-4A5A-A75C-13F1040F2157}"
@@ -12,6 +14,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{9E21D0
 		.nuget\nuget.exe = .nuget\nuget.exe
 		.nuget\nuget.targets = .nuget\nuget.targets
 		.nuget\packages.config = .nuget\packages.config
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{6C0D319B-DB73-4186-AFC4-F4CAF7652FBE}"
+	ProjectSection(SolutionItems) = preProject
+		.gitattributes = .gitattributes
+		.gitignore = .gitignore
+		README.md = README.md
 	EndProjectSection
 EndProject
 Global

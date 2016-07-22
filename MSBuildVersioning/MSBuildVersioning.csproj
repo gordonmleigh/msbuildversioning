@@ -73,9 +73,9 @@
     </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <UsingTask Condition="'$(Configuration)|$(Platform)' != 'Bootstrap|AnyCPU'" TaskName="HgVersionFile" AssemblyFile="..\References\MSBuildVersioning.dll" />
+  <UsingTask Condition="'$(Configuration)|$(Platform)' != 'Bootstrap|AnyCPU'" TaskName="GitVersionFile" AssemblyFile="..\References\MSBuildVersioning.dll" />
   <Target Name="BeforeBuild">
-    <HgVersionFile Condition="'$(Configuration)|$(Platform)' != 'Bootstrap|AnyCPU'" TemplateFile="Properties\VersionInfo.cs" DestinationFile="Properties\VersionInfo.Designer.cs" />
+    <GitVersionFile Condition="'$(Configuration)|$(Platform)' != 'Bootstrap|AnyCPU'" TemplateFile="Properties\VersionInfo.cs" DestinationFile="Properties\VersionInfo.Designer.cs" />
   </Target>
   <Target Name="AfterBuild">
   </Target>
